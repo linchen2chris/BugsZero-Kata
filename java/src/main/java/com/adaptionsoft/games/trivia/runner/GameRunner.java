@@ -12,7 +12,6 @@ public class GameRunner {
 	public static void main(String[] args) {
 		Random rand = new Random();
 		playGame(rand);
-		
 	}
 
 	public static void playGame(Random rand) {
@@ -25,16 +24,13 @@ public class GameRunner {
 
 		do {
 
-			aGame.roll(rand.nextInt(5) + 1);
+			aGame.roll(rand.nextInt(5) + 1); // 1,2,3,4,5
 
-			if (rand.nextInt(9) == 7) {
+			if (rand.nextInt(9) == 7) { // 0 ... 8
 				notAWinner = aGame.wrongAnswer();
 			} else {
 				notAWinner = aGame.wasCorrectlyAnswered();
 			}
-
-
-
 		} while (notAWinner);
 	}
 }
