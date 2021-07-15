@@ -24,12 +24,13 @@ public class GameRunner {
 
 		do {
 
-			aGame.roll(rand.nextInt(5) + 1); // 1,2,3,4,5
+			int roll = rand.nextInt(5) + 1;
+			aGame.roll(roll); // 1,2,3,4,5
 
 			if (rand.nextInt(9) == 7) { // 0 ... 8
 				notAWinner = aGame.wrongAnswer();
 			} else {
-				notAWinner = aGame.wasCorrectlyAnswered();
+				notAWinner = aGame.wasCorrectlyAnswered(roll);
 			}
 		} while (notAWinner);
 	}
