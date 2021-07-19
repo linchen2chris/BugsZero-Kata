@@ -108,11 +108,10 @@ public class Game {
         if (inPenaltyBox[currentPlayer]) {
             if (roll % 2 != 0) {
                 System.out.println("Answer was correct!!!!");
-                setNextPlayer();
                 purses[currentPlayer]++;
                 System.out.println(players.get(currentPlayer) + " now has " + purses[currentPlayer] + " Gold Coins.");
-
                 boolean winner = didPlayerWin();
+                setNextPlayer();
 
                 return winner;
             } else {
