@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
+    final int MAX_LOCATION = 12;
     ArrayList<String> players = new ArrayList<String>(); // max 6 players min 2players
-    int[] places = new int[6];
-    int[] purses = new int[6];
-    boolean[] inPenaltyBox = new boolean[6];
+    int[] places = new int[6]; // palyers 的走位
+    int[] purses = new int[6]; // 每个player的金币数
+    boolean[] inPenaltyBox = new boolean[6]; //记录是否被处罚
     LinkedList<String> popQuestions = new LinkedList<String>();
     LinkedList<String> scienceQuestions = new LinkedList<String>();
     LinkedList<String> sportsQuestions = new LinkedList<String>();
@@ -60,9 +61,7 @@ public class Game {
     }
 
     private void movePlayerAndAskQuestion(int roll) {
-        places[currentPlayer] = places[currentPlayer] + roll;
-        if (places[currentPlayer] > 11)
-            places[currentPlayer] = places[currentPlayer] - 12;
+        places[currentPlayer] = (places[currentPlayer] + roll) % this.MAX_LOCATION;
 
         System.out.println(players.get(currentPlayer) + "'s new location is " + places[currentPlayer]);
         System.out.println("The category is " + currentCategory());
