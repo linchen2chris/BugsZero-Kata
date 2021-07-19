@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
-    ArrayList players = new ArrayList();
+    ArrayList<String> players = new ArrayList<String>();
     int[] places = new int[6];
     int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
-
     LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
     LinkedList sportsQuestions = new LinkedList();
@@ -21,7 +20,7 @@ public class Game {
             popQuestions.addLast("Pop Question " + i);
             scienceQuestions.addLast(("Science Question " + i));
             sportsQuestions.addLast(("Sports Question " + i));
-			rockQuestions.addLast(createRockQuestion(i));
+            rockQuestions.addLast(createRockQuestion(i));
         }
     }
 
@@ -81,37 +80,37 @@ public class Game {
 
     private void askQuestion() {
         switch (currentCategory()) {
-            case "Pop":
-                System.out.println(popQuestions.removeFirst());
-                break;
-            case "Science":
-                System.out.println(scienceQuestions.removeFirst());
-                break;
-            case "Sports":
-                System.out.println(sportsQuestions.removeFirst());
-                break;
-            case "Rock":
-                System.out.println(rockQuestions.removeFirst());
-                break;
+        case "Pop":
+            System.out.println(popQuestions.removeFirst());
+            break;
+        case "Science":
+            System.out.println(scienceQuestions.removeFirst());
+            break;
+        case "Sports":
+            System.out.println(sportsQuestions.removeFirst());
+            break;
+        case "Rock":
+            System.out.println(rockQuestions.removeFirst());
+            break;
         }
     }
 
     private String currentCategory() {
         switch (places[currentPlayer]) {
-            case 0:
-            case 4:
-            case 8:
-                return "Pop";
-            case 1:
-            case 5:
-            case 9:
-                return "Science";
-            case 2:
-            case 6:
-            case 10:
-                return "Sports";
-            default:
-                return "Rock";
+        case 0:
+        case 4:
+        case 8:
+            return "Pop";
+        case 1:
+        case 5:
+        case 9:
+            return "Science";
+        case 2:
+        case 6:
+        case 10:
+            return "Sports";
+        default:
+            return "Rock";
         }
     }
 
