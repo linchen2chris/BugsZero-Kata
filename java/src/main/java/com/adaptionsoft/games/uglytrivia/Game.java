@@ -8,10 +8,10 @@ public class Game {
     int[] places = new int[6];
     int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
-    LinkedList popQuestions = new LinkedList();
-    LinkedList scienceQuestions = new LinkedList();
-    LinkedList sportsQuestions = new LinkedList();
-    LinkedList rockQuestions = new LinkedList();
+    LinkedList<String> popQuestions = new LinkedList<String>();
+    LinkedList<String> scienceQuestions = new LinkedList<String>();
+    LinkedList<String> sportsQuestions = new LinkedList<String>();
+    LinkedList<String> rockQuestions = new LinkedList<String>();
 
     int currentPlayer = 0;
 
@@ -24,13 +24,13 @@ public class Game {
         }
     }
 
-    public String createRockQuestion(int index) {
+    private String createRockQuestion(int index) {
         return "Rock Question " + index;
     }
 
-    public boolean isPlayable() {
-        return (howManyPlayers() >= 2);
-    }
+    // private boolean isPlayable() {
+    //     return (howManyPlayers() >= 2);
+    // }
 
     public boolean add(String playerName) {
 
@@ -44,7 +44,7 @@ public class Game {
         return true;
     }
 
-    public int howManyPlayers() {
+    private int howManyPlayers() {
         return players.size();
     }
 
@@ -157,6 +157,7 @@ public class Game {
         setNextPlayer();
         return true;
     }
+
 
     private boolean didPlayerWin() {
         return !(purses[currentPlayer] == 6);
