@@ -8,7 +8,7 @@ public class Game {
     ArrayList<String> players = new ArrayList<String>(); // max 6 players min 2players
     int[] places = new int[6]; // palyers 的走位
     int[] purses = new int[6]; // 每个player的金币数
-    boolean[] inPenaltyBox = new boolean[6]; //记录是否被处罚
+    boolean[] inPenaltyBox = new boolean[6]; // 记录是否被处罚
     LinkedList<String> popQuestions = new LinkedList<String>();
     LinkedList<String> scienceQuestions = new LinkedList<String>();
     LinkedList<String> sportsQuestions = new LinkedList<String>();
@@ -105,31 +105,19 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered(Integer roll) {
-        if (inPenaltyBox[currentPlayer]) {
-            if (roll % 2 != 0) {
-                System.out.println("Answer was correct!!!!");
-                purses[currentPlayer]++;
-                System.out.println(players.get(currentPlayer) + " now has " + purses[currentPlayer] + " Gold Coins.");
-                boolean winner = didPlayerWin();
-                setNextPlayer();
-
-                return winner;
-            } else {
-                setNextPlayer();
-                return true;
-            }
-
-        } else {
-
-            System.out.println("Answer was correct!!!!");
-            purses[currentPlayer]++;
-            System.out.println(players.get(currentPlayer) + " now has " + purses[currentPlayer] + " Gold Coins.");
-
-            boolean winner = didPlayerWin();
+        if (inPenaltyBox[currentPlayer] && roll % 2 == 0) {
             setNextPlayer();
-
-            return winner;
+            return true;
         }
+
+        System.out.println("Answer was correct!!!!");
+        purses[currentPlayer]++;
+        System.out.println(players.get(currentPlayer) + " now has " + purses[currentPlayer] + " Gold Coins.");
+
+        boolean winner = didPlayerWin();
+        setNextPlayer();
+
+        return winner;
     }
 
     private void setNextPlayer() {
@@ -146,7 +134,6 @@ public class Game {
         setNextPlayer();
         return true;
     }
-
 
     private boolean didPlayerWin() {
         return !(purses[currentPlayer] == 6);
