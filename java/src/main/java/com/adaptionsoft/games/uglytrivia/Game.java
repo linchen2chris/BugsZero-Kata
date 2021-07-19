@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
-    ArrayList<String> players = new ArrayList<String>();
+    ArrayList<String> players = new ArrayList<String>(); // max 6 players min 2players
     int[] places = new int[6];
     int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
@@ -20,17 +20,9 @@ public class Game {
             popQuestions.addLast("Pop Question " + i);
             scienceQuestions.addLast(("Science Question " + i));
             sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast(createRockQuestion(i));
+            rockQuestions.addLast(("Rock Question " + i));
         }
     }
-
-    private String createRockQuestion(int index) {
-        return "Rock Question " + index;
-    }
-
-    // private boolean isPlayable() {
-    //     return (howManyPlayers() >= 2);
-    // }
 
     public boolean add(String playerName) {
 
