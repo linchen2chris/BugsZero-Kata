@@ -107,7 +107,7 @@ public class Game {
     public boolean wasCorrectlyAnswered(Integer roll) {
         if (inPenaltyBox[currentPlayer] && roll % 2 == 0) {
             setNextPlayer();
-            return true;
+            return false;
         }
 
         System.out.println("Answer was correct!!!!");
@@ -132,10 +132,10 @@ public class Game {
         inPenaltyBox[currentPlayer] = true;
 
         setNextPlayer();
-        return true;
+        return false;
     }
 
     private boolean didPlayerWin() {
-        return !(purses[currentPlayer] == 6);
+        return purses[currentPlayer] == 6;
     }
 }
