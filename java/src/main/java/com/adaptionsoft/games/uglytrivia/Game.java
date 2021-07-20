@@ -121,9 +121,7 @@ public class Game {
     }
 
     private void setNextPlayer() {
-        currentPlayer++;
-        if (currentPlayer == players.size())
-            currentPlayer = 0;
+        currentPlayer = (currentPlayer + 1)% howManyPlayers();
     }
 
     public boolean wrongAnswer() {
@@ -136,6 +134,7 @@ public class Game {
     }
 
     private boolean didPlayerWin() {
-        return purses[currentPlayer] == 6;
+        int MAX_COINS = 6;
+        return purses[currentPlayer] == MAX_COINS;
     }
 }
