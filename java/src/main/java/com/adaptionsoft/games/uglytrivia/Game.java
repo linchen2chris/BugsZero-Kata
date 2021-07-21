@@ -109,7 +109,7 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered(Integer roll) {
-        if (inPenaltyBox[currentPlayer] && gettingOutOfPenaltyBox(roll)) {
+        if (inPenaltyBox[currentPlayer] && !gettingOutOfPenaltyBox(roll)) {
             setNextPlayer();
             return false;
         }
