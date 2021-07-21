@@ -12,6 +12,8 @@ public class GameConfig {
 
     final Map<Integer, String> placesQuestionMap = new HashMap<>();
     final Map<String, LinkedList<String>> categoryQuestionMap = new HashMap<>();
+    final Integer MAX_COIN = 6;
+    final Integer MAX_POSITON = 12;
 
     public GameConfig () {
         for (int i = 0; i < 50; i++) {
@@ -36,6 +38,10 @@ public class GameConfig {
         categoryQuestionMap.put("Science", this.scienceQuestions);
         categoryQuestionMap.put("Sports", this.sportsQuestions);
         categoryQuestionMap.put("Rock", this.rockQuestions);
+    }
+
+    public boolean isGettingOutOfPenaltyBox(int roll) {
+        return roll % 2 != 0;
     }
 
 }

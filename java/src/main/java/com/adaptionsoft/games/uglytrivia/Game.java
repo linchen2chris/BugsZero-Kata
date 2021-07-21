@@ -3,7 +3,6 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.ArrayList;
 
 public class Game {
-    final int MAX_LOCATION = 12;
     ArrayList<String> players = new ArrayList<String>(); // max 6 players min 2players
     int[] places = new int[6]; // palyers 的走位
     int[] purses = new int[6]; // 每个player的金币数
@@ -11,8 +10,6 @@ public class Game {
     GameConfig config = new GameConfig();
 
     int currentPlayer = 0;
-
-    public Game() {}
 
     public void add(String playerName) {
 
@@ -34,7 +31,7 @@ public class Game {
         System.out.println("They have rolled a " + roll);
 
         if (inPenaltyBox[currentPlayer]) {
-            if (gettingOutOfPenaltyBox(roll)) {
+            if (config.isGettingOutOfPenaltyBox(roll)) {
                 System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
                 movePlayerAndAskQuestion(roll);
             } else {
@@ -45,12 +42,8 @@ public class Game {
         }
     }
 
-    private boolean gettingOutOfPenaltyBox(int roll) {
-        return roll % 2 != 0;
-    }
-
     private void movePlayerAndAskQuestion(int roll) {
-        places[currentPlayer] = (places[currentPlayer] + roll) % this.MAX_LOCATION;
+        places[currentPlayer] = (places[currentPlayer] + roll) % config.MAX_POSITON;
 
         System.out.println(players.get(currentPlayer) + "'s new location is " + places[currentPlayer]);
         String category = config.placesQuestionMap.get(places[currentPlayer]);
@@ -60,7 +53,7 @@ public class Game {
 
 
     public boolean wasCorrectlyAnswered(Integer roll) {
-        if (inPenaltyBox[currentPlayer] && !gettingOutOfPenaltyBox(roll)) {
+        if (inPenaltyBox[currentPlayer] && !config.isGettingOutOfPenaltyBox(roll)) {
             setNextPlayer();
             return false;
         }
@@ -89,7 +82,6 @@ public class Game {
     }
 
     private boolean didPlayerWin() {
-        int MAX_COINS = 6;
-        return purses[currentPlayer] == MAX_COINS;
+        return purses[currentPlayer] == config.MAX_COIN;
     }
 }
