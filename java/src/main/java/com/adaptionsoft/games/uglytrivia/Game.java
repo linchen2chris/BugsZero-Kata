@@ -1,7 +1,6 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Game {
     final int MAX_LOCATION = 12;
@@ -9,21 +8,11 @@ public class Game {
     int[] places = new int[6]; // palyers 的走位
     int[] purses = new int[6]; // 每个player的金币数
     boolean[] inPenaltyBox = new boolean[6]; // 记录是否被处罚
-    LinkedList<String> popQuestions = new LinkedList<String>();
-    LinkedList<String> scienceQuestions = new LinkedList<String>();
-    LinkedList<String> sportsQuestions = new LinkedList<String>();
-    LinkedList<String> rockQuestions = new LinkedList<String>();
+    GameConfig config = new GameConfig();
 
     int currentPlayer = 0;
 
-    public Game() {
-        for (int i = 0; i < 50; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast(("Rock Question " + i));
-        }
-    }
+    public Game() {}
 
     public void add(String playerName) {
 
@@ -50,14 +39,10 @@ public class Game {
                 movePlayerAndAskQuestion(roll);
             } else {
                 System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
-
             }
-
         } else {
-
             movePlayerAndAskQuestion(roll);
         }
-
     }
 
     private boolean gettingOutOfPenaltyBox(int roll) {
@@ -68,45 +53,11 @@ public class Game {
         places[currentPlayer] = (places[currentPlayer] + roll) % this.MAX_LOCATION;
 
         System.out.println(players.get(currentPlayer) + "'s new location is " + places[currentPlayer]);
-        System.out.println("The category is " + currentCategory());
-        askQuestion();
+        String category = config.placesQuestionMap.get(places[currentPlayer]);
+        System.out.println("The category is " + category);
+        System.out.println(config.categoryQuestionMap.get(category).removeFirst());
     }
 
-    private void askQuestion() {
-        switch (currentCategory()) {
-        case "Pop":
-            System.out.println(popQuestions.removeFirst());
-            break;
-        case "Science":
-            System.out.println(scienceQuestions.removeFirst());
-            break;
-        case "Sports":
-            System.out.println(sportsQuestions.removeFirst());
-            break;
-        case "Rock":
-            System.out.println(rockQuestions.removeFirst());
-            break;
-        }
-    }
-
-    private String currentCategory() {
-        switch (places[currentPlayer]) {
-        case 0:
-        case 4:
-        case 8:
-            return "Pop";
-        case 1:
-        case 5:
-        case 9:
-            return "Science";
-        case 2:
-        case 6:
-        case 10:
-            return "Sports";
-        default:
-            return "Rock";
-        }
-    }
 
     public boolean wasCorrectlyAnswered(Integer roll) {
         if (inPenaltyBox[currentPlayer] && !gettingOutOfPenaltyBox(roll)) {
