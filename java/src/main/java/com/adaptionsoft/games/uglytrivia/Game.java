@@ -7,7 +7,7 @@ public class Game {
     int[] places = new int[6]; // palyers 的走位
     int[] purses = new int[6]; // 每个player的金币数
     boolean[] inPenaltyBox = new boolean[6]; // 记录是否被处罚
-    GameConfig config = new GameConfig();
+    GameConfig gameConfig = new GameConfig();
 
     int currentPlayer = 0;
 
@@ -31,7 +31,7 @@ public class Game {
         System.out.println("They have rolled a " + roll);
 
         if (inPenaltyBox[currentPlayer]) {
-            if (config.isGettingOutOfPenaltyBox(roll)) {
+            if (gameConfig.isGettingOutOfPenaltyBox(roll)) {
                 System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
                 movePlayerAndAskQuestion(roll);
             } else {
@@ -43,17 +43,17 @@ public class Game {
     }
 
     private void movePlayerAndAskQuestion(int roll) {
-        places[currentPlayer] = (places[currentPlayer] + roll) % config.MAX_POSITON;
+        places[currentPlayer] = (places[currentPlayer] + roll) % gameConfig.MAX_POSITON;
 
         System.out.println(players.get(currentPlayer) + "'s new location is " + places[currentPlayer]);
-        String category = config.placesQuestionMap.get(places[currentPlayer]);
+        String category = gameConfig.placesQuestionMap.get(places[currentPlayer]);
         System.out.println("The category is " + category);
-        System.out.println(config.categoryQuestionMap.get(category).removeFirst());
+        System.out.println(gameConfig.categoryQuestionMap.get(category).removeFirst());
     }
 
 
     public boolean wasCorrectlyAnswered(Integer roll) {
-        if (inPenaltyBox[currentPlayer] && !config.isGettingOutOfPenaltyBox(roll)) {
+        if (inPenaltyBox[currentPlayer] && !gameConfig.isGettingOutOfPenaltyBox(roll)) {
             setNextPlayer();
             return false;
         }
@@ -82,6 +82,6 @@ public class Game {
     }
 
     private boolean didPlayerWin() {
-        return purses[currentPlayer] == config.MAX_COIN;
+        return purses[currentPlayer] == gameConfig.MAX_COIN;
     }
 }
